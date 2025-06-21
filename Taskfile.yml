@@ -1,0 +1,51 @@
+version: "3"
+
+dotenv: ['.env']
+
+tasks:
+  setup:
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - orb start
+      - docker compose down --rmi local --volumes
+      - docker compose up -d
+      - mix setup
+      - clear
+    silent: true
+  update:
+    cmds:
+      - mix deps.update --all
+  seed:
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - mix seed
+  up:
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - orb start
+      - docker compose up -d
+  iex:
+    deps: [setup]
+    cmds:
+      - task: seed
+      - clear
+      - cmd: iex -S mix
+        silent: true
+      - defer: docker compose down --rmi local --volumes
+  run:
+    preconditions:
+      - test -f docker-compose.yml
+    deps: [setup]
+    cmds:
+      - task: seed
+      - clear
+      - mix phx.server
+      - defer: docker compose down --rmi local --volumes
+  test:
+    deps: [up]
+    cmds:
+      - mix test
+      - defer: docker compose down --rmi local --volumes
