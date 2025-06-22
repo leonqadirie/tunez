@@ -4,6 +4,10 @@ defmodule Tunez.Music.Album do
   postgres do
     table "albums"
     repo Tunez.Repo
+
+    references do
+      reference :artist, index?: true
+    end
   end
 
   attributes do
@@ -21,5 +25,11 @@ defmodule Tunez.Music.Album do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  relationships do
+    belongs_to :artist, Tunez.Music.Artist do
+      allow_nil? false
+    end
   end
 end
