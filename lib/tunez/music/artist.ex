@@ -2,8 +2,20 @@ defmodule Tunez.Music.Artist do
   use Ash.Resource, otp_app: :tunez, domain: Tunez.Music, data_layer: AshPostgres.DataLayer
 
   postgres do
-    table("artists")
-    repo(Tunez.Repo)
+    table "artists"
+    repo Tunez.Repo
+  end
+
+  actions do
+    defaults [:read, :destroy]
+
+    create :create do
+      accept [:name, :biography]
+    end
+
+    update :update do
+      accept [:name, :biography]
+    end
   end
 
   attributes do
