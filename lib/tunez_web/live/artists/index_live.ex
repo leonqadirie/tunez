@@ -20,7 +20,8 @@ defmodule TunezWeb.Artists.IndexLive do
       Tunez.Music.search_artists!(
         query_text,
         page: page_params,
-        query: [sort_input: sort_by]
+        query: [sort_input: sort_by],
+        actor: socket.assigns.current_user
       )
 
     socket =
