@@ -1,5 +1,8 @@
 import Config
 
+config :ash_authentication,
+  debug_authentication_failures?: true
+
 # Configure your database
 config :tunez, Tunez.Repo,
   username: "postgres",
