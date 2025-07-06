@@ -3,6 +3,10 @@ import Config
 config :ash_authentication,
   debug_authentication_failures?: true
 
+config :ash,
+       :policies,
+       show_policy_breakdowns?: true
+
 # Configure your database
 config :tunez, Tunez.Repo,
   username: "postgres",
