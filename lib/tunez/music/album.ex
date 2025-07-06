@@ -20,6 +20,10 @@ defmodule Tunez.Music.Album do
     end
   end
 
+  resource do
+    description "A collection of music tracks."
+  end
+
   actions do
     defaults [:read, :destroy]
 
