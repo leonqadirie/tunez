@@ -42,10 +42,8 @@ defmodule TunezWeb.Artists.IndexLive do
         <:action>
           <.search_box query={@query_text} method="get" data-role="artist-search" phx-submit="search" />
         </:action>
-        <:action>
-          <.button_link navigate={~p"/artists/new"} kind="primary">
-            New Artist
-          </.button_link>
+        <:action :if={Tunez.Music.can_create_artist?(@current_user)}>
+          <.button_link navigate={~p"/artists/new"} kind="primary">New Artist</.button_link>
         </:action>
       </.header>
 
