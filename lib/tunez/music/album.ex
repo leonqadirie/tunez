@@ -40,6 +40,11 @@ defmodule Tunez.Music.Album do
     end
   end
 
+  changes do
+    change relate_actor(:created_by, allow_nil?: true), on: [:create]
+    change relate_actor(:updated_by, allow_nil?: true)
+  end
+
   validations do
     validate numericality(
                :year_released,
