@@ -190,7 +190,7 @@ defmodule TunezWeb.Artists.IndexLive do
     ]
   end
 
-  def validate_sort_by(key) do
+  defp validate_sort_by(key) do
     valid_keys = Enum.map(sort_options(), &elem(&1, 1))
 
     if key in valid_keys do
@@ -224,7 +224,7 @@ defmodule TunezWeb.Artists.IndexLive do
     {:noreply, push_patch(socket, to: ~p"/?#{params}")}
   end
 
-  def round_count(number) do
+  defp round_count(number) do
     case number do
       n when n >= 1_000_000 -> "#{Float.round(n / 1_000_000, 1)}M"
       n when n >= 1_000 -> "#{Float.round(n / 1_000, 1)}K"
