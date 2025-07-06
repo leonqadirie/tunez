@@ -287,6 +287,10 @@ defmodule Tunez.Accounts.User do
            ]) do
       authorize_if always()
     end
+
+    policy action(:read) do
+      authorize_if expr(id == ^actor(:id))
+    end
   end
 
   attributes do
