@@ -80,20 +80,20 @@ defmodule Tunez.Generator do
           generate(user(role: :admin))
         end)
 
-    # after_action =
-    #   if opts[:album_count] do
-    #     fn artist ->
-    #       generate_many(album(artist_id: artist.id), opts[:album_count])
-    #       Ash.load!(artist, :albums)
-    #     end
-    #   end
+    after_action =
+      if opts[:album_count] do
+        fn artist ->
+          generate_many(album(artist_id: artist.id), opts[:album_count])
+          Ash.load!(artist, :albums)
+        end
+      end
 
     if opts[:seed?] do
       seed_generator(
         %Tunez.Music.Artist{name: sequence(:artist_name, &"Artist #{&1}")},
         actor: actor,
-        overrides: opts
-        # after_action: after_action
+        overrides: opts,
+        after_action: after_action
       )
     else
       changeset_generator(
@@ -101,8 +101,8 @@ defmodule Tunez.Generator do
         :create,
         defaults: [name: sequence(:artist_name, &"Artist #{&1}")],
         actor: actor,
-        overrides: opts
-        # after_action: after_action
+        overrides: opts,
+        after_action: after_action
       )
     end
   end

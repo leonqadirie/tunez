@@ -63,17 +63,16 @@ defmodule Tunez.Music.ArtistTest do
       assert actual == ["first", "second", "third"]
     end
 
-    @tag :skip
     test "can sort by number of album releases" do
-      # generate(artist(name: "two", album_count: 2))
-      # generate(artist(name: "none"))
-      # generate(artist(name: "one", album_count: 1))
-      # generate(artist(name: "three", album_count: 3))
+      generate(artist(name: "two", album_count: 2))
+      generate(artist(name: "none"))
+      generate(artist(name: "one", album_count: 1))
+      generate(artist(name: "three", album_count: 3))
 
-      # actual =
-      #   names(Music.search_artists!("", query: [sort_input: "-album_count"]))
+      actual =
+        names(Music.search_artists!("", query: [sort_input: "-album_count"]))
 
-      # assert actual == ["three", "two", "one", "none"]
+      assert actual == ["three", "two", "one", "none"]
     end
 
     test "can paginate search results" do
