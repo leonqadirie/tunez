@@ -36,32 +36,32 @@ defmodule Tunez.Generator do
     #     end
     #   end
 
-    # if opts[:seed?] do
-    #   seed_generator(
-    #     %Tunez.Music.Album{
-    #       name: sequence(:album_name, &"Album #{&1}"),
-    #       year_released: StreamData.integer(1951..2024),
-    #       artist_id: artist_id
-    #     },
-    #     actor: actor,
-    #     overrides: opts,
-    #     after_action: after_action
-    #   )
-    # else
-    changeset_generator(
-      Tunez.Music.Album,
-      :create,
-      defaults: [
-        name: sequence(:album_name, &"Album #{&1}"),
-        year_released: StreamData.integer(1951..2024),
-        artist_id: artist_id,
-        cover_image_url: nil
-      ],
-      overrides: opts,
-      actor: actor
-      # after_action: after_action
-    )
-    # end
+    if opts[:seed?] do
+      seed_generator(
+        %Tunez.Music.Album{
+          name: sequence(:album_name, &"Album #{&1}"),
+          year_released: StreamData.integer(1951..2024),
+          artist_id: artist_id
+        },
+        actor: actor,
+        overrides: opts
+        # after_action: after_action
+      )
+    else
+      changeset_generator(
+        Tunez.Music.Album,
+        :create,
+        defaults: [
+          name: sequence(:album_name, &"Album #{&1}"),
+          year_released: StreamData.integer(1951..2024),
+          artist_id: artist_id,
+          cover_image_url: nil
+        ],
+        overrides: opts,
+        actor: actor
+        # after_action: after_action
+      )
+    end
   end
 
   @doc """
@@ -88,23 +88,23 @@ defmodule Tunez.Generator do
     #     end
     #   end
 
-    # if opts[:seed?] do
-    #   seed_generator(
-    #     %Tunez.Music.Artist{name: sequence(:artist_name, &"Artist #{&1}")},
-    #     actor: actor,
-    #     overrides: opts,
-    #     after_action: after_action
-    #   )
-    # else
-    changeset_generator(
-      Tunez.Music.Artist,
-      :create,
-      defaults: [name: sequence(:artist_name, &"Artist #{&1}")],
-      actor: actor,
-      overrides: opts
-      # after_action: after_action
-    )
-    # end
+    if opts[:seed?] do
+      seed_generator(
+        %Tunez.Music.Artist{name: sequence(:artist_name, &"Artist #{&1}")},
+        actor: actor,
+        overrides: opts
+        # after_action: after_action
+      )
+    else
+      changeset_generator(
+        Tunez.Music.Artist,
+        :create,
+        defaults: [name: sequence(:artist_name, &"Artist #{&1}")],
+        actor: actor,
+        overrides: opts
+        # after_action: after_action
+      )
+    end
   end
 
   @doc """
