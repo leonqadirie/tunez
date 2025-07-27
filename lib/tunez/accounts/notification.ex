@@ -12,12 +12,12 @@ defmodule Tunez.Accounts.Notification do
 
     references do
       reference :user, index?: true, on_delete: :delete
-      reference :album, on_delete: :delete
+      reference :album
     end
   end
 
   actions do
-    defaults [:destroy]
+    defaults [:read, :destroy]
 
     create :create do
       accept [:user_id, :album_id]

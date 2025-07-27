@@ -31,7 +31,7 @@ defmodule Tunez.Music.Album do
   end
 
   actions do
-    defaults [:read, :destroy]
+    defaults [:read]
 
     create :create do
       accept [:name, :year_released, :cover_image_url, :artist_id]
@@ -55,6 +55,11 @@ defmodule Tunez.Music.Album do
                type: :direct_control,
                order_is_key: :order
              )
+    end
+
+    destroy :destroy do
+      primary? true
+      change cascade_destroy(:notifications, return_notifications?: true, after_action?: false)
     end
   end
 
@@ -132,6 +137,8 @@ defmodule Tunez.Music.Album do
       sort order: :asc
       public? true
     end
+
+    has_many :notifications, Tunez.Accounts.Notification
   end
 
   calculations do
