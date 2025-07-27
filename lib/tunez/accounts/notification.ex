@@ -30,6 +30,10 @@ defmodule Tunez.Accounts.Notification do
     policy action(:create) do
       forbid_if always()
     end
+
+    policy action(:for_user) do
+      authorize_if actor_present()
+    end
   end
 
   attributes do
