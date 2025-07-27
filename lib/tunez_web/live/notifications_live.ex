@@ -7,6 +7,10 @@ defmodule TunezWeb.NotificationsLive do
     notifications =
       Tunez.Accounts.notifications_for_user!(actor: socket.assigns.current_user)
 
+    if connected?(socket) do
+      "notifications:#{socket.assigns.current_user.id}" |> TunezWeb.Endpoint.subscribe()
+    end
+
     {:ok, assign(socket, notifications: notifications)}
   end
 
@@ -58,6 +62,12 @@ defmodule TunezWeb.NotificationsLive do
       </div>
     </div>
     """
+  end
+
+  def handle_info(%{topic: "notifications:" <> _}, socket) do
+    notifications = Tunez.Accounts.notifications_for_user!(actor: socket.assigns.current_user)
+
+    {:noreply, assign(socket, notifications: notifications)}
   end
 
   def handle_event("dismiss-notification", %{"id" => id}, socket) do
