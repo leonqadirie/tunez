@@ -139,6 +139,8 @@ defmodule Tunez.Music.Artist do
       public? true
     end
 
+    count :follower_count, :follower_relationships
+
     first :latest_album_year_released, :albums, :year_released do
       public? true
     end

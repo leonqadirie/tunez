@@ -60,6 +60,7 @@ defmodule Tunez.Music do
         default_options: [
           load: [
             :album_count,
+            :follower_count,
             :followed_by_me,
             :latest_album_year_released,
             :cover_image_url

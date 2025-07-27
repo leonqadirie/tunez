@@ -78,6 +78,7 @@ defmodule TunezWeb.Artists.IndexLive do
       >
         {@artist.name}
       </.link>
+      <.follower_count_display count={@artist.follower_count} />
     </p>
     <.artist_card_album_info artist={@artist} />
     """
