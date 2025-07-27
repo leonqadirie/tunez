@@ -45,6 +45,10 @@ defmodule Tunez.Music.ArtistFollower do
     policy action_type(:create) do
       authorize_if actor_present()
     end
+
+    policy action_type(:destroy) do
+      authorize_if actor_present()
+    end
   end
 
   relationships do
