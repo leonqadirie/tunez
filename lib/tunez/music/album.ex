@@ -76,7 +76,7 @@ defmodule Tunez.Music.Album do
     end
 
     policy action_type([:update, :destroy]) do
-      authorize_if expr(^actor(:role) == :editor and created_by_id == ^actor(:id))
+      authorize_if expr(can_manage_album?)
     end
   end
 
@@ -149,6 +149,13 @@ defmodule Tunez.Music.Album do
               }
 
     calculate :duration, :string, Tunez.Music.Calculations.SecondsToMinutes
+
+    calculate :can_manage_album?,
+              :boolean,
+              expr(
+                ^actor(:role) == :admin or
+                  (^actor(:role) == :editor and created_by_id == ^actor(:id))
+              )
   end
 
   aggregates do
