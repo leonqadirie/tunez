@@ -46,6 +46,11 @@ defmodule Tunez.Accounts.Notification do
   pub_sub do
     prefix "notifications"
     module TunezWeb.Endpoint
+
+    transform fn notification ->
+      Map.take(notification.data, [:id, :user_id, :album_id])
+    end
+
     publish :create, [:user_id]
   end
 
