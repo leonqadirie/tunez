@@ -138,6 +138,12 @@ defmodule Tunez.Music.Album do
                 Tunez.Music.Calculations.YearsAgo,
                 load: [:year_released]
               }
+
+    calculate :duration, :string, Tunez.Music.Calculations.SecondsToMinutes
+  end
+
+  aggregates do
+    sum :duration_seconds, :tracks, :duration_seconds
   end
 
   identities do
