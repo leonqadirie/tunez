@@ -17,6 +17,11 @@ defmodule Tunez.Music.ArtistFollower do
 
   actions do
     defaults [:read]
+
+    create :create do
+      accept [:artist_id]
+      change relate_actor(:follower, allow_nil?: false)
+    end
   end
 
   policies do
