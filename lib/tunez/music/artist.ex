@@ -40,7 +40,7 @@ defmodule Tunez.Music.Artist do
   end
 
   actions do
-    defaults [:read, :destroy]
+    defaults [:read]
 
     create :create do
       accept [:name, :biography]
@@ -65,6 +65,11 @@ defmodule Tunez.Music.Artist do
 
       change Tunez.Music.Changes.UpdatePreviousNames,
         where: [changing(:name)]
+    end
+
+    destroy :destroy do
+      primary? true
+      change cascade_destroy(:albums, return_notifications?: true, after_action?: false)
     end
   end
 

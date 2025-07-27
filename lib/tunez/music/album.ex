@@ -21,8 +21,7 @@ defmodule Tunez.Music.Album do
 
     references do
       reference :artist,
-        index?: true,
-        on_delete: :delete
+        index?: true
     end
   end
 
