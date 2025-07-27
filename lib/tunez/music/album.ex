@@ -128,6 +128,7 @@ defmodule Tunez.Music.Album do
 
     has_many :tracks, Tunez.Music.Track do
       sort order: :asc
+      public? true
     end
   end
 

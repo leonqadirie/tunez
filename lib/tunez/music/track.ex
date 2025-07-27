@@ -64,6 +64,7 @@ defmodule Tunez.Music.Track do
 
     attribute :name, :string do
       allow_nil? false
+      public? true
     end
 
     attribute :duration_seconds, :integer do
@@ -82,7 +83,12 @@ defmodule Tunez.Music.Track do
   end
 
   calculations do
-    calculate :number, :integer, expr(order + 1)
-    calculate :duration, :string, Tunez.Music.Calculations.SecondsToMinutes
+    calculate :number, :integer, expr(order + 1) do
+      public? true
+    end
+
+    calculate :duration, :string, Tunez.Music.Calculations.SecondsToMinutes do
+      public? true
+    end
   end
 end
