@@ -11,6 +11,10 @@ defmodule Tunez.Music.ArtistFollower do
     end
   end
 
+  actions do
+    defaults [:read]
+  end
+
   relationships do
     belongs_to :artist, Tunez.Music.Artist do
       primary_key? true
