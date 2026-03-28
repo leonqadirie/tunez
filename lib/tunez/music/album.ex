@@ -58,7 +58,8 @@ defmodule Tunez.Music.Album do
 
     destroy :destroy do
       primary? true
-      change cascade_destroy(:notifications, return_notifications?: true, after_action?: false)
+      change Tunez.Music.Changes.BroadcastNotificationDeletions
+      change cascade_destroy(:notifications, after_action?: false)
     end
   end
 
